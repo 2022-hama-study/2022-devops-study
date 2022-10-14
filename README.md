@@ -29,9 +29,13 @@ HAMA 사내 데브옵스 스터디를 위한 레파지토리입니다.
 
 > 아래의 도서로 스터디가 진행됩니다.
 
-[도커&쿠버네티스](https://product.kyobobook.co.kr/detail/S000001766500)  
-[컨테이너 인프라 환경 구축을 위한 쿠버네티스/도커](https://product.kyobobook.co.kr/detail/S000001834629)  
-[도커, 컨테이너 빌드업!](https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000002993435)  
+| name | book |
+|:----:|:----:|
+| gyuho | [완벽한 IT 인프라 구축을 위한 Docker](https://product.kyobobook.co.kr/detail/S000000833213)  |
+| hyeonji | [도커, 컨테이너 빌드업!](https://ebook-product.kyobobook.co.kr/dig/epd/ebook/E000002993435)  |
+| juseok | [그림과 실습으로 배우는 도커 & 쿠버네티스](https://product.kyobobook.co.kr/detail/S000001766500)  |
+| minseon | [컨테이너 인프라 환경 구축을 위한 쿠버네티스/도커](https://product.kyobobook.co.kr/detail/S000001834629)  |
+
 
 # 방식
 
