@@ -21,8 +21,13 @@
 | veth | NACL |
 | docker0 | 라우팅 테이블 |
 
+<p>
+    <img src="https://github.com/2022-hama-study/2022-devops-study/blob/master/books/docker/juseok/assets/chapter5-1.png", height="400x">
+</p>  
+
 Docker를 설치한 후 호스트의 네트워크 인터페이스를 살펴보면 `docker0`라는 가상 인터페이스가 생긴다.  
-**docker0** 는 일반적인 가상 네트워크 인터페이스가 아니라 도커가 자체적으로 제공하는 네트워크 드라이버 중 하나이며 **브릿지(bridge)** 에 해당한다.  
+**docker0** 는 일반적인 가상 네트워크 인터페이스가 아니라 도커가 자체적으로 제공하는  
+네트워크 드라이버 중 하나이며 **브릿지(bridge)** 에 해당한다.  
 **docker0** 브릿지는 컨테이너간 통신을 위해 사용된다.  
 
 네트워크를 별도로 생성하면 각 네트워크마다 각각 다른 대역의 서브넷이 할당된다.  
