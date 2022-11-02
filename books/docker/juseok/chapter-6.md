@@ -108,11 +108,11 @@ $ docker build -t [생성할 이미지 이름] [도커파일이 위치하고 있
 |ENTRYPOINT|컨테이너를 실행할 때 최초 실행 할 명령어 지정(오버라이드 비허용)|  
 |EXPOSE|강제로 통신에 사용할 포트를 지정|  
 
-- ADD vs COPY
+- ADD vs COPY  
 ADD 는 원격지의 파일을 이미지 안에 포함시키고자 할 때 사용하고,  
 COPY 는 호스트(로컬) 파일을 이미지 안에 포함시켜야 할 때 사용한다.
 
-- CMD vs ENTRYPOINT
+- CMD vs ENTRYPOINT  
 CMD 와 ENTRYPOINT 의 역할은 같지만, 차이가 조금 있다.  
 예를 들어 `CMD ["echo", "hello"]` 라고 지정했다면,  
 컨테이너를 실행 할 때 `docker run [이미지 이름] echo hi` 라고 하면 hello가 출력되지 않고 hi가 출력된다.  
