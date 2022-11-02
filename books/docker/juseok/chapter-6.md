@@ -209,7 +209,62 @@ services:
 도커를 사용하다 보면 `docker run ...` 이런식으로 도커 명령어로 컨테이너를 관리한다.  
 그런데 옵션이 한두개일때는 별 상관이 없지만 3개, 4개 그 이상이 되기 시작하면.. 헷갈리고 매번 그 긴 명령어를 기억하기란 정말 쉽지 않은 일이다.  
 
-정리중....
+도커파일은 이미지를 생성하기 위해 사용한다면, 도커 컴포즈 파일은 컨테이너를 띄우고 관리하기 위해 사용한다고 할 수 있을 것 같다.  
+  
+하지만 도커 컴포즈를 사용하면 위 문제를 해결 할 수 있다!  
+예를 들어보면,  
+`docker run -dit --gpus all -e NVIDIA_VISIBLE_DEVICES=all -v ./Projects:/home/hama/Projects --workdir /home/hama/Projects --restart always --network host --name examples_1 examples:0.0.3 /bin/bash`  
+보기만해도.. 정신사납다..  
+
+도커 컴포즈 파일을 작성해보자.  
+```yaml
+version: "3"
+services:
+  examples:
+    image: examples:0.0.3
+    container_name: examples_1
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - ./Projects:/home/hama/Projects
+    working_dir: /home/hama/Projects
+    network_mode: "host"
+    tty: true
+    restart: always
+```
+이처럼 훨씬 깔끔하게 작성하여 누구든지 한눈에 파악할 수 있을 정도로 가독성이 향상된다.  
+그리고 외우지 않아도 파일로 관리 할 수 있기 때문에 관리가 편해진다는 장점이 있다.  
+
+사실 이게 도커 컴포즈를 사용해야하는 첫번째 이유이고..  
+두번째는 도커 네트워크, 도커 볼륨을 이 파일안에서 정의 할 수 있다는 점이다.    
+
+위 예제는 로컬 서버에 이미 있는 이미지로 컨테이너를 띄우기 위한 컴포즈파일 예시이고  
+아래는 원하는 이미지가 없을 때 미리 작성해둔 도커파일로 이미지를 빌드하는 예시이다.  
+```bash
+version: "3"
+services:
+  examples:
+    image: examples:0.0.3
+    container_name: examples_1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - ./Projects:/home/hama/Projects
+    working_dir: /home/hama/Projects
+    network_mode: "host"
+    tty: true
+```
+이처럼 빌드 시스템?으로서도 활용이 가능하다.  
+
+컨테이너를 여러개 정의해서 한번에 띄우는 것도 가능하다.  
+```yaml
+작성중...
+```
 
 ----
 
