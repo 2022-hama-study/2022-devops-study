@@ -263,11 +263,84 @@ services:
 
 컨테이너를 여러개 정의해서 한번에 띄우는 것도 가능하다.  
 ```yaml
-작성중...
+version: "3"
+services:
+    vision:
+        container_name: vision
+        image: vision:0.0.1
+        build:
+          context: ./
+          dockerfile: vision/Dockerfile
+        runtime: nvidia
+        volumes:
+         - ./:/Projects
+        ports:
+         - 8000:8000
+        working_dir: /Projects
+        tty: true
+        restart: always
+        command: >
+          python3 main.py
+          --host=0.0.0.0
+          --port=8000
+          --config=/Projects/vision/configs/config.json
+
+    analyzer:
+        container_name: analyzer
+        image: analyzer:0.0.1
+        build:
+            context: ./
+            dockerfile: notifier/Dockerfile
+        volumes:
+         - ./:/Projects
+        working_dir: /Projects
+        tty: true
+        restart: always
+        command: python3 main.py -c /Projects/analyzer/configs/config.json
+
+    recorder:
+        container_name: recorder
+        image: recorder:0.0.1
+        build:
+            context: ./
+            dockerfile: recorder/Dockerfile
+        volumes:
+         - ./:/Projects
+        working_dir: /Projects
+        tty: true
+        restart: always
+        command: python3 main.py -c /Projects/recorder/configs/config.json
+
+    storage:
+        container_name: storage
+        image: python:3.7-alpine
+        volumes:
+         - /hdd_ext/outputs:/outputs/
+        ports:
+         - 9805:9805
+        restart: always
+        working_dir: /outputs/
+        command: python3 -m http.server 9805
+
+    monitor:
+        container_name: monitor
+        image: monitor:0.0.1
+        build:
+            context: ./
+            dockerfile: monitor/Dockerfile
+        privileged: true
+        volumes:
+         - ./:/Projects
+        working_dir: /Projects
+        tty: true
+        restart: always
+        command: python3 main.py -c /Projects/monitor/configs/config.json
 ```
+마구잡이로 작성하긴 했지만..  
+대충 이런 느낌으로 포트를 열어 데이터를 넘길 수도 있고  
+한꺼번에(동시에) 관리가 가능하다.  
 
 ----
 
 ## 8. 쿠버네티스
-
-
+(작성중...)
