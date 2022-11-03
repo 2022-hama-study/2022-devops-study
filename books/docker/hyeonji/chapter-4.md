@@ -38,8 +38,7 @@ docker —net, —network 옵션을 이용해 선택할 수 있고 docker networ
 → **오버레이를 통해 서로다른 서버의 도커간의 연결이 가능함.**
 
 😀 참고문서
-
-[](https://code-machina.github.io/2019/08/08/Docker-Swarm-Overlay-Network-Part-1.html)
+https://code-machina.github.io/2019/08/08/Docker-Swarm-Overlay-Network-Part-1.html
 
 도커 네트워크 카드의 경우 **docker connect**로 추가 연결이 가능하고 **docker disconnect**를 사용하면 해제됨.
 
